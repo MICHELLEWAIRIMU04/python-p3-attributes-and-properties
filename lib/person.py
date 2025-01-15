@@ -26,12 +26,12 @@ class Person:
     
 
     @name.setter
-    def name(self, value):
-        if isinstance(value, str) and 1 <= len(value) <= 25:
-            self._name = value.title()
+    def name(self, name):
+        if isinstance(name, str) and 1 <= len(name) <= 25:
+            self._name = name.title()
         
         else:
-            print( "Name must be string between 1 and 25 characters.")
+            raise ValueError( "Name must be string between 1 and 25 characters.")
 
     
     @property
@@ -39,14 +39,17 @@ class Person:
         return self._job
 
     @job.setter
-    def job(self, value):
-        if value in APPROVED_JOBS:
-            self._job = value
+    def job(self, job):
+        if job in APPROVED_JOBS:
+            self._job = job
 
         else:
-            print("Job must be in list of approved jobs.")
+            raise ValueError("Job must be in list of approved jobs.")
 
 
-fido = Person("Michelle Wairimu", "Admin")
-print(fido.name)
-print(fido.job)
+try:
+    fido = Person("Michelle Wairimu the most beautiful host of the all", "Admin")
+    print(fido.name)
+    print(fido.job)
+except ValueError as e:
+    print(e)
